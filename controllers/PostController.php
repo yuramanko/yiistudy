@@ -7,8 +7,8 @@
  */
 
 namespace app\controllers;
-
 use Yii;
+use app\models\TestForm;
 
 class PostController extends AppController{
 
@@ -23,16 +23,17 @@ class PostController extends AppController{
 
     public function actionIndex(){
         if( Yii::$app->request->isAjax ){
-//            debug($_POST);
             debug(Yii::$app->request->post());
             return 'test';
         }
+
+        $model = new TestForm();
+
         $this->view->title = 'Все статьи';
-        return $this->render('test');
+        return $this->render('test', compact('model'));
     }
 
     public function actionShow(){
-//        $this->layout = 'basic';
         $this->view->title = 'Одна статья!';
         $this->view->registerMetaTag(['name' => 'keywords', 'content' => 'ключевики...']);
         $this->view->registerMetaTag(['name' => 'description', 'content' => 'описание страницы...']);
